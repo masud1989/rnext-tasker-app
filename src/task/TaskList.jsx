@@ -1,4 +1,5 @@
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaTrash } from "react-icons/fa";
+import { TfiPencilAlt } from "react-icons/tfi";
 
 export default function TaskList({ tasks, onEdit, onDelete, onFav }) {
   return (
@@ -13,20 +14,16 @@ export default function TaskList({ tasks, onEdit, onDelete, onFav }) {
               Title
             </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize w-full">
-              {" "}
-              Description{" "}
+              Description
             </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[350px]">
-              {" "}
-              Tags{" "}
+              Tags
             </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[100px]">
-              {" "}
-              Priority{" "}
+              Priority
             </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[100px]">
-              {" "}
-              Options{" "}
+              Options
             </th>
           </tr>
         </thead>
@@ -65,15 +62,15 @@ export default function TaskList({ tasks, onEdit, onDelete, onFav }) {
                 <div className="flex items-center justify-center space-x-3">
                   <button
                     onClick={() => onDelete(task.id)}
-                    className="text-red-500"
+                    className="text-red-500 text-2xl"
                   >
-                    Delete
+                    <FaTrash />
                   </button>
                   <button
                     onClick={() => onEdit(task)}
-                    className="text-blue-500"
+                    className="text-green-500 text-2xl"
                   >
-                    Edit
+                    <TfiPencilAlt />
                   </button>
                 </div>
               </td>
