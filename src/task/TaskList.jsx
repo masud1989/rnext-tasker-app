@@ -1,14 +1,15 @@
-import {FaStar} from 'react-icons/fa';
+import { FaStar } from "react-icons/fa";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, onEdit }) {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
-        <thead className='bg-gray-700'>
+        <thead className="bg-gray-700">
           <tr>
-            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]">Favorite</th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]">
+              Favorite
+            </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize w-[200px]">
-              
               Title
             </th>
             <th className="p-4 pb-8 text-sm font-semibold capitalize w-full">
@@ -36,8 +37,11 @@ export default function TaskList({ tasks }) {
               className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
             >
               <td>
-                
-              {task.isFavorite? <FaStar color='yellow' /> : <FaStar color='gray' />}
+                {task.isFavorite ? (
+                  <FaStar color="yellow" />
+                ) : (
+                  <FaStar color="gray" />
+                )}
               </td>
               <td>{task.title}</td>
               <td>
@@ -58,7 +62,12 @@ export default function TaskList({ tasks }) {
               <td>
                 <div className="flex items-center justify-center space-x-3">
                   <button className="text-red-500">Delete</button>
-                  <button className="text-blue-500">Edit</button>
+                  <button
+                    onClick={() => onEdit(task)}
+                    className="text-blue-500"
+                  >
+                    Edit
+                  </button>
                 </div>
               </td>
             </tr>
