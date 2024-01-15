@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddEditModal({ onSave, taskToUpdate }) {
+export default function AddEditModal({ onSave, taskToUpdate, onCloseModal }) {
   const [task, setTask] = useState(
     taskToUpdate || {
       id: crypto.randomUUID(),
@@ -32,7 +32,7 @@ export default function AddEditModal({ onSave, taskToUpdate }) {
       <form className="mx-auto my-2 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-10 lg:p-11 z-10 absolute top-1/4 left-1/4">
         <div className="flex items-center justify-between">
           <h2 className="mb-20 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-            {isAdd ? " Add New Task" : "Update Task"}
+            {isAdd ? " Add New Task" : "Edit Task"}
           </h2>
         </div>
 
@@ -98,8 +98,8 @@ export default function AddEditModal({ onSave, taskToUpdate }) {
 
         <div className="mt-16 flex justify-end lg:mt-20 ">
           <button
-            type="submit"
             className="mx-5 rounded bg-red-500 px-4 py-2 text-white font-bold transition-all hover:opacity-80"
+            onClick={onCloseModal}
           >
             Cancel
           </button>
@@ -108,7 +108,7 @@ export default function AddEditModal({ onSave, taskToUpdate }) {
             type="submit"
             className="rounded bg-indigo-600 px-4 py-2 text-white font-bold transition-all hover:opacity-80"
           >
-            Save Task
+            {isAdd ? "Create Task" : "Update Task"}
           </button>
         </div>
       </form>

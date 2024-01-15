@@ -19,7 +19,7 @@ export default function TaskBoard() {
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-  function handleAddTask(newTask, isAdd) {
+  function handleAddOrEditTask(newTask, isAdd) {
     if (isAdd) {
       setTasks([...tasks, newTask]);
     } else {
@@ -41,18 +41,44 @@ export default function TaskBoard() {
     setShowAddEditModal(true);
   }
 
+  function handleDeleteTask(taskId) {
+    const taskAfterDelete = tasks.filter((task) => task.id !== taskId);
+    setTasks(taskAfterDelete);
+  }
+
+  function handleOnDeleteAllClick() {
+    tasks.length = 0;
+    setTasks([...tasks]);
+  }
+
+  function handleCloseBtn() {
+    setShowAddEditModal(false);
+    setTaskToUpdate(null);
+  }
+
   return (
     <section className="mb-20" id="tasks">
       {showAddEditModal && (
-        <AddEditModal onSave={handleAddTask} taskToUpdate={taskToUpdate} />
+        <AddEditModal
+          onSave={handleAddOrEditTask}
+          taskToUpdate={taskToUpdate}
+          onCloseModal={handleCloseBtn}
+        />
       )}
       <div className="container">
         <div className="p-2 flex justify-end">
           <SearchTask />
         </div>
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskActions onAddClick={() => setShowAddEditModal(true)} />
-          <TaskList tasks={tasks} onEdit={handleEditTask} />
+          <TaskActions
+            onAddClick={() => setShowAddEditModal(true)}
+            onDeleteAllClick={handleOnDeleteAllClick}
+          />
+          <TaskList
+            tasks={tasks}
+            onEdit={handleEditTask}
+            onDelete={handleDeleteTask}
+          />
         </div>
       </div>
     </section>
